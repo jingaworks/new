@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidPlace;
 
 class CreateProducatorRequest extends FormRequest
 {
@@ -27,8 +28,8 @@ class CreateProducatorRequest extends FormRequest
             'titular' => ['required', 'string', 'min:5', 'max:150'], 
             'serie' => ['required', 'string', 'size:2', 'exists:regions,mnemonic'], 
             'numar' => ['required', 'digits:7'], 
-            'emitent' => ['required', 'string', 'max:100', 'exists:places,denloc'], 
-            'judet' => ['required', 'string', 'max:100', 'exists:regions,denj'], 
+            'region' => ['required', 'string', 'max:100', 'exists:regions,denj'], 
+            'place' => ['required', 'string', 'max:70', 'exists:places,denloc', new ValidPlace($this->region)],
             'viza' => ['required', 'digits:4', 'starts_with:20']
         ];
     }

@@ -22,14 +22,14 @@
                                 @csrf
 
                                 <div class="form-group row">
-                                    <label for="nume" class="col-lg-4 form-label">{{ __('Nume Juridic') }}</label>
+                                    <label for="name" class="col-lg-4 form-label">{{ __('Nume Juridic') }}</label>
 
                                     <div class="col-lg-8">
-                                        <input id="nume" type="text" class="form-control{{ $errors->has('nume') ? ' is-invalid' : '' }}" name="nume" value="{{ old('nume') }}" required>
+                                        <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required>
 
-                                        @if ($errors->has('nume'))
+                                        @if ($errors->has('name'))
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('nume') }}</strong>
+                                                <strong>{{ $errors->first('name') }}</strong>
                                             </span>
                                         @endif
                                     </div>
@@ -49,43 +49,57 @@
                                     </div>
                                 </div>
 
+<div class="form-group row">
+    <label for="phone" class="col-lg-4 form-label">{{ __('Telefon') }}</label>
+
+    <div class="col-lg-8">
+        <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
+
+        @if ($errors->has('phone'))
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $errors->first('phone') }}</strong>
+            </span>
+        @endif
+    </div>
+</div>
+
                                 <div class="form-group row">
-                                    <label for="judet" class="col-lg-4 form-label">{{ __('Judet') }}</label>
+                                    <label for="region" class="col-lg-4 form-label">{{ __('Judet') }}</label>
 
                                     <div class="col-lg-8">
-                                        <input id="judet" type="text" class="form-control{{ $errors->has('judet') ? ' is-invalid' : '' }}" name="judet" value="{{ old('judet') }}" required>
+                                        <input id="region" type="text" class="form-control{{ $errors->has('region') ? ' is-invalid' : '' }}" name="region" value="{{ old('region') }}" required>
 
-                                        @if ($errors->has('judet'))
+                                        @if ($errors->has('region'))
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('judet') }}</strong>
+                                                <strong>{{ $errors->first('region') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="localitate" class="col-lg-4 form-label">{{ __('Localitate') }}</label>
+                                    <label for="place" class="col-lg-4 form-label">{{ __('Localitate') }}</label>
 
                                     <div class="col-lg-8">
-                                        <input id="localitate" type="text" class="form-control{{ $errors->has('localitate') ? ' is-invalid' : '' }}" name="localitate" value="{{ old('localitate') }}" required>
+                                        <input id="place" type="text" class="form-control{{ $errors->has('place') ? ' is-invalid' : '' }}" name="place" value="{{ old('place') }}" required>
 
-                                        @if ($errors->has('localitate'))
+                                        @if ($errors->has('place'))
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('localitate') }}</strong>
+                                                <strong>{{ $errors->first('place') }}</strong>
                                             </span>
                                         @endif
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="adresa" class="col-lg-4 form-label">{{ __('Adresa') }}</label>
+                                    <label for="address" class="col-lg-4 form-label">{{ __('Adresa') }}</label>
 
                                     <div class="col-lg-8">
-                                        <textarea name="adresa" id="adresa" cols="30" rows="4" class="form-control{{ $errors->has('adresa') ? ' is-invalid' : '' }}">{{ old('adresa') }}</textarea>
+                                        <textarea name="address" id="address" cols="30" rows="4" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}">{{ old('address') }}</textarea>
 
-                                        @if ($errors->has('adresa'))
+                                        @if ($errors->has('address'))
                                             <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('adresa') }}</strong>
+                                                <strong>{{ $errors->first('address') }}</strong>
                                             </span>
                                         @endif
                                     </div>

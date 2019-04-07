@@ -25,18 +25,19 @@ class UserTableSeeder extends Seeder
             'titular' => 'Jinga Laurentiu',
             'serie' => 'CT',
             'numar' => '1000000',
-            'emitent' => 'Constanta',
-            'judet' => 'Constanta',
+            'place' => 'Constanta',
+            'region' => 'Constanta',
             'viza' => '2019',
             'user_id' => $user->id
         ]);
         
         Companie::create([
-            'nume' => 'Jinga Works',
+            'name' => 'Jinga Works',
             'cui' => 10000000,
-            'judet' => 'Constanta',
-            'localitate' => 'Constanta',
-            'adresa' => 'my address',
+            'region' => 'Constanta',
+            'place' => 'Constanta',
+            'phone' => '0712345678',
+            'address' => 'my address',
             'producator_id' => $producator->id
         ]);
     }

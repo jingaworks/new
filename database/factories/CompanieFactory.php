@@ -5,10 +5,11 @@ use App\Companie;
 
 $factory->define(Companie::class, function (Faker $faker) {
     return [
-        'nume' => $faker->company,
+        'name' => $faker->company,
         'cui' => $faker->numberBetween(10000000, 99999999),
-        'judet' => $faker->state,
-        'localitate' => $faker->city,
-        'adresa' => $faker->address,
+        'region' => $faker->state,
+        'place' => $faker->city,
+        'phone' => '07' . $faker->numberBetween(10000000, 99999999),
+        'address' => $faker->address,
     ];
 });

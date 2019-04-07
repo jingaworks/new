@@ -55,30 +55,30 @@
                                 </div>
 
                                 <div class="form-group row px-3">
-                                    <label for="emitent" class="form-label">{{ __('Primaria emitenta') }}</label>
-                                    <input id="emitent" type="text" class="form-control{{ $errors->has('emitent') ? ' is-invalid' : '' }}" name="emitent" value="{{ old('localitate') }}" required>
+                                    <label for="place" class="form-label">{{ __('Primaria emitenta') }}</label>
+                                    <input id="place" type="text" class="form-control{{ $errors->has('place') ? ' is-invalid' : '' }}" name="place" value="{{ old('place') }}" required>
 
-                                    @if ($errors->has('emitent'))
+                                    @if ($errors->has('place'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('emitent') }}</strong>
+                                            <strong>{{ $errors->first('place') }}</strong>
                                         </span>
                                     @endif
                                 </div>
 
                                 <div class="form-group row px-3">
-                                    <label for="judet" class="form-label">{{ __('Judet') }}</label>
-                                    <input id="judet" type="text" class="form-control{{ $errors->has('judet') ? ' is-invalid' : '' }}" name="judet" value="{{ old('judet') }}" required>
+                                    <label for="region" class="form-label">{{ __('Judet') }}</label>
+                                    <input id="region" type="text" class="form-control{{ $errors->has('region') ? ' is-invalid' : '' }}" name="region" value="{{ old('region') }}" required>
 
-                                    @if ($errors->has('judet'))
+                                    @if ($errors->has('region'))
                                         <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $errors->first('judet') }}</strong>
+                                            <strong>{{ $errors->first('region') }}</strong>
                                         </span>
                                     @endif
                                 </div>
 
                                 <div class="form-group row px-3">
                                     <label for="viza" class="form-label">{{ __('Anul vizat') }}</label>
-                                    <select name="viza" id="viza" class="form-control{{ $errors->has('judet') ? ' is-invalid' : '' }}">
+                                    <select name="viza" id="viza" class="form-control{{ $errors->has('viza') ? ' is-invalid' : '' }}">
                                         <option value="2019">2019</option>
                                         <option value="2020">2020</option>
                                     </select>

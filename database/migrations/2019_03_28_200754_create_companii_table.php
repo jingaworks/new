@@ -15,11 +15,12 @@ class CreateCompaniiTable extends Migration
     {
         Schema::create('companii', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nume', 190);
+            $table->string('name', 190);
             $table->unsignedBigInteger('cui')->unique();
-            $table->string('judet', 100);
-            $table->string('localitate', 100);
-            $table->string('adresa', 190)->nullable();
+            $table->string('phone', 10);
+            $table->string('region', 100);
+            $table->string('place', 100);
+            $table->string('address', 190)->nullable();
             $table->unsignedBigInteger('producator_id');
             $table->timestamps();
 
