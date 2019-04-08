@@ -25,8 +25,8 @@ class UserTableSeeder extends Seeder
             'titular' => 'Jinga Laurentiu',
             'serie' => 'CT',
             'numar' => '1000000',
-            'place' => 'Constanta',
             'region' => 'Constanta',
+            'place' => 'Constanta',
             'viza' => '2019',
             'user_id' => $user->id
         ]);

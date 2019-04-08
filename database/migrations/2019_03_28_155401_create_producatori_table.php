@@ -18,8 +18,8 @@ class CreateProducatoriTable extends Migration
             $table->string('titular', 150);
             $table->char('serie', 2);
             $table->unsignedBigInteger('numar');
-            $table->string('place', 100);
             $table->string('region', 100);
+            $table->string('place', 100);
             $table->year('viza');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();

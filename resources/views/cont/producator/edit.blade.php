@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">Adauga datele Atestatului de Producator</div>
+                <div class="card-header">Editeaza datele Atestatului de Producator</div>
 
                 <div class="card-body">
                     @if (session('status'))

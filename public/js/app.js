@@ -1830,15 +1830,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       form: new Form({
         nume: '',
         cui: '',
-        judet: '',
-        localitate: '',
-        adresa: ''
+        phone: '',
+        region: '',
+        place: '',
+        address: ''
       })
     };
   },
@@ -1953,8 +1964,8 @@ __webpack_require__.r(__webpack_exports__);
         titular: '',
         serie: '',
         numar: '',
-        judet: '',
-        emitent: '',
+        region: '',
+        place: '',
         viza: ''
       })
     };
@@ -2078,8 +2089,8 @@ __webpack_require__.r(__webpack_exports__);
         titular: '',
         serie: '',
         numar: '',
-        judet: '',
-        emitent: '',
+        region: '',
+        place: '',
         viza: ''
       }
     };
@@ -20137,7 +20148,48 @@ var render = function() {
         _c("div", { staticClass: "form-group row" }, [
           _c(
             "label",
-            { staticClass: "col-lg-4 form-label", attrs: { for: "judet" } },
+            { staticClass: "col-lg-4 form-label", attrs: { for: "phone" } },
+            [_vm._v("Telefon")]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-8" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.phone,
+                  expression: "form.phone"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { id: "phone", type: "text", name: "phone" },
+              domProps: { value: _vm.form.phone },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "phone", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _vm.form.errors.has("phone")
+              ? _c("span", {
+                  staticClass: "text-danger",
+                  domProps: {
+                    textContent: _vm._s(_vm.form.errors.get("phone"))
+                  }
+                })
+              : _vm._e()
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
+          _c(
+            "label",
+            { staticClass: "col-lg-4 form-label", attrs: { for: "region" } },
             [_vm._v("Judet")]
           ),
           _vm._v(" "),
@@ -20147,28 +20199,28 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.judet,
-                  expression: "form.judet"
+                  value: _vm.form.region,
+                  expression: "form.region"
                 }
               ],
               staticClass: "form-control",
-              attrs: { id: "judet", type: "text", name: "judet" },
-              domProps: { value: _vm.form.judet },
+              attrs: { id: "region", type: "text", name: "region" },
+              domProps: { value: _vm.form.region },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "judet", $event.target.value)
+                  _vm.$set(_vm.form, "region", $event.target.value)
                 }
               }
             }),
             _vm._v(" "),
-            _vm.form.errors.has("judet")
+            _vm.form.errors.has("region")
               ? _c("span", {
                   staticClass: "text-danger",
                   domProps: {
-                    textContent: _vm._s(_vm.form.errors.get("judet"))
+                    textContent: _vm._s(_vm.form.errors.get("region"))
                   }
                 })
               : _vm._e()
@@ -20178,10 +20230,7 @@ var render = function() {
         _c("div", { staticClass: "form-group row" }, [
           _c(
             "label",
-            {
-              staticClass: "col-lg-4 form-label",
-              attrs: { for: "localitate" }
-            },
+            { staticClass: "col-lg-4 form-label", attrs: { for: "place" } },
             [_vm._v("Localitate")]
           ),
           _vm._v(" "),
@@ -20191,28 +20240,28 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.localitate,
-                  expression: "form.localitate"
+                  value: _vm.form.place,
+                  expression: "form.place"
                 }
               ],
               staticClass: "form-control",
-              attrs: { id: "localitate", type: "text", name: "localitate" },
-              domProps: { value: _vm.form.localitate },
+              attrs: { id: "place", type: "text", name: "place" },
+              domProps: { value: _vm.form.place },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "localitate", $event.target.value)
+                  _vm.$set(_vm.form, "place", $event.target.value)
                 }
               }
             }),
             _vm._v(" "),
-            _vm.form.errors.has("localitate")
+            _vm.form.errors.has("place")
               ? _c("span", {
                   staticClass: "text-danger",
                   domProps: {
-                    textContent: _vm._s(_vm.form.errors.get("localitate"))
+                    textContent: _vm._s(_vm.form.errors.get("place"))
                   }
                 })
               : _vm._e()
@@ -20222,7 +20271,7 @@ var render = function() {
         _c("div", { staticClass: "form-group row" }, [
           _c(
             "label",
-            { staticClass: "col-lg-4 form-label", attrs: { for: "adresa" } },
+            { staticClass: "col-lg-4 form-label", attrs: { for: "address" } },
             [_vm._v("Adresa")]
           ),
           _vm._v(" "),
@@ -20232,28 +20281,28 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.adresa,
-                  expression: "form.adresa"
+                  value: _vm.form.address,
+                  expression: "form.address"
                 }
               ],
               staticClass: "form-control",
-              attrs: { name: "adresa", id: "adresa", cols: "30", rows: "3" },
-              domProps: { value: _vm.form.adresa },
+              attrs: { name: "address", id: "address", cols: "30", rows: "3" },
+              domProps: { value: _vm.form.address },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "adresa", $event.target.value)
+                  _vm.$set(_vm.form, "address", $event.target.value)
                 }
               }
             }),
             _vm._v(" "),
-            _vm.form.errors.has("adresa")
+            _vm.form.errors.has("address")
               ? _c("span", {
                   staticClass: "text-danger",
                   domProps: {
-                    textContent: _vm._s(_vm.form.errors.get("adresa"))
+                    textContent: _vm._s(_vm.form.errors.get("address"))
                   }
                 })
               : _vm._e()
@@ -20439,7 +20488,7 @@ var render = function() {
         _c("div", { staticClass: "form-group row" }, [
           _c(
             "label",
-            { staticClass: "col-lg-4 form-label", attrs: { for: "judet" } },
+            { staticClass: "col-lg-4 form-label", attrs: { for: "region" } },
             [_vm._v("Judet")]
           ),
           _vm._v(" "),
@@ -20449,28 +20498,28 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.judet,
-                  expression: "form.judet"
+                  value: _vm.form.region,
+                  expression: "form.region"
                 }
               ],
               staticClass: "form-control",
-              attrs: { id: "judet", type: "text", name: "judet" },
-              domProps: { value: _vm.form.judet },
+              attrs: { id: "region", type: "text", name: "region" },
+              domProps: { value: _vm.form.region },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "judet", $event.target.value)
+                  _vm.$set(_vm.form, "region", $event.target.value)
                 }
               }
             }),
             _vm._v(" "),
-            _vm.form.errors.has("judet")
+            _vm.form.errors.has("region")
               ? _c("span", {
                   staticClass: "text-danger",
                   domProps: {
-                    textContent: _vm._s(_vm.form.errors.get("judet"))
+                    textContent: _vm._s(_vm.form.errors.get("region"))
                   }
                 })
               : _vm._e()
@@ -20480,7 +20529,7 @@ var render = function() {
         _c("div", { staticClass: "form-group row" }, [
           _c(
             "label",
-            { staticClass: "col-lg-4 form-label", attrs: { for: "emitent" } },
+            { staticClass: "col-lg-4 form-label", attrs: { for: "place" } },
             [_vm._v("Emitent")]
           ),
           _vm._v(" "),
@@ -20490,28 +20539,28 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.emitent,
-                  expression: "form.emitent"
+                  value: _vm.form.place,
+                  expression: "form.place"
                 }
               ],
               staticClass: "form-control",
-              attrs: { id: "emitent", type: "text", name: "emitent" },
-              domProps: { value: _vm.form.emitent },
+              attrs: { id: "place", type: "text", name: "place" },
+              domProps: { value: _vm.form.place },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "emitent", $event.target.value)
+                  _vm.$set(_vm.form, "place", $event.target.value)
                 }
               }
             }),
             _vm._v(" "),
-            _vm.form.errors.has("emitent")
+            _vm.form.errors.has("place")
               ? _c("span", {
                   staticClass: "text-danger",
                   domProps: {
-                    textContent: _vm._s(_vm.form.errors.get("emitent"))
+                    textContent: _vm._s(_vm.form.errors.get("place"))
                   }
                 })
               : _vm._e()
@@ -20771,7 +20820,7 @@ var render = function() {
                     "label",
                     {
                       staticClass: "col-lg-4 form-label",
-                      attrs: { for: "judet" }
+                      attrs: { for: "region" }
                     },
                     [_vm._v("Judet")]
                   ),
@@ -20782,28 +20831,28 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.judet,
-                          expression: "form.judet"
+                          value: _vm.form.region,
+                          expression: "form.region"
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { id: "judet", type: "text", name: "judet" },
-                      domProps: { value: _vm.form.judet },
+                      attrs: { id: "region", type: "text", name: "region" },
+                      domProps: { value: _vm.form.region },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.form, "judet", $event.target.value)
+                          _vm.$set(_vm.form, "region", $event.target.value)
                         }
                       }
                     }),
                     _vm._v(" "),
-                    _vm.form.errors && _vm.form.errors.has("judet")
+                    _vm.form.errors && _vm.form.errors.has("region")
                       ? _c("span", {
                           staticClass: "text-danger",
                           domProps: {
-                            textContent: _vm._s(_vm.form.errors.get("judet"))
+                            textContent: _vm._s(_vm.form.errors.get("region"))
                           }
                         })
                       : _vm._e()
@@ -20815,7 +20864,7 @@ var render = function() {
                     "label",
                     {
                       staticClass: "col-lg-4 form-label",
-                      attrs: { for: "emitent" }
+                      attrs: { for: "place" }
                     },
                     [_vm._v("Emitent")]
                   ),
@@ -20826,28 +20875,28 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.emitent,
-                          expression: "form.emitent"
+                          value: _vm.form.place,
+                          expression: "form.place"
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { id: "emitent", type: "text", name: "emitent" },
-                      domProps: { value: _vm.form.emitent },
+                      attrs: { id: "place", type: "text", name: "place" },
+                      domProps: { value: _vm.form.place },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.form, "emitent", $event.target.value)
+                          _vm.$set(_vm.form, "place", $event.target.value)
                         }
                       }
                     }),
                     _vm._v(" "),
-                    _vm.form.errors && _vm.form.errors.has("emitent")
+                    _vm.form.errors && _vm.form.errors.has("place")
                       ? _c("span", {
                           staticClass: "text-danger",
                           domProps: {
-                            textContent: _vm._s(_vm.form.errors.get("emitent"))
+                            textContent: _vm._s(_vm.form.errors.get("place"))
                           }
                         })
                       : _vm._e()
@@ -33615,8 +33664,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\work\new\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\work\new\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\projects\pdr\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\projects\pdr\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -24,31 +24,41 @@
             </div>
 
             <div class="form-group row">
-                <label for="judet" class="col-lg-4 form-label">Judet</label>
+                <label for="phone" class="col-lg-4 form-label">Telefon</label>
 
                 <div class="col-lg-8">
-                    <input id="judet" type="text" class="form-control" name="judet" v-model="form.judet">
-                    <span class="text-danger" v-if="form.errors.has('judet')" v-text="form.errors.get('judet')"></span>
+                    <input id="phone" type="text" class="form-control" name="phone" v-model="form.phone">
+                    <span class="text-danger" v-if="form.errors.has('phone')" v-text="form.errors.get('phone')"></span>
 
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="localitate" class="col-lg-4 form-label">Localitate</label>
+                <label for="region" class="col-lg-4 form-label">Judet</label>
 
                 <div class="col-lg-8">
-                    <input id="localitate" type="text" class="form-control" name="localitate" v-model="form.localitate">
-                    <span class="text-danger" v-if="form.errors.has('localitate')" v-text="form.errors.get('localitate')"></span>
+                    <input id="region" type="text" class="form-control" name="region" v-model="form.region">
+                    <span class="text-danger" v-if="form.errors.has('region')" v-text="form.errors.get('region')"></span>
 
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="adresa" class="col-lg-4 form-label">Adresa</label>
+                <label for="place" class="col-lg-4 form-label">Localitate</label>
 
                 <div class="col-lg-8">
-                    <textarea name="adresa" id="adresa" cols="30" rows="3" class="form-control" v-model="form.adresa"></textarea>
-                    <span class="text-danger" v-if="form.errors.has('adresa')" v-text="form.errors.get('adresa')"></span>
+                    <input id="place" type="text" class="form-control" name="place" v-model="form.place">
+                    <span class="text-danger" v-if="form.errors.has('place')" v-text="form.errors.get('place')"></span>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="address" class="col-lg-4 form-label">Adresa</label>
+
+                <div class="col-lg-8">
+                    <textarea name="address" id="address" cols="30" rows="3" class="form-control" v-model="form.address"></textarea>
+                    <span class="text-danger" v-if="form.errors.has('address')" v-text="form.errors.get('address')"></span>
 
                 </div>
             </div>
@@ -74,9 +84,10 @@
                 form: new Form({
                     nume: '',
                     cui: '',
-                    judet: '',
-                    localitate: '',
-                    adresa: '',
+                    phone: '',
+                    region: '',
+                    place: '',
+                    address: '',
                 })
             }
         },

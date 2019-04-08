@@ -34,21 +34,21 @@
             </div>
 
             <div class="form-group row">
-                <label for="judet" class="col-lg-4 form-label">Judet</label>
+                <label for="region" class="col-lg-4 form-label">Judet</label>
 
                 <div class="col-lg-8">
-                    <input id="judet" type="text" class="form-control" name="judet" v-model="form.judet">
-                    <span class="text-danger" v-if="form.errors.has('judet')" v-text="form.errors.get('judet')"></span>
+                    <input id="region" type="text" class="form-control" name="region" v-model="form.region">
+                    <span class="text-danger" v-if="form.errors.has('region')" v-text="form.errors.get('region')"></span>
 
                 </div>
             </div>
 
             <div class="form-group row">
-                <label for="emitent" class="col-lg-4 form-label">Emitent</label>
+                <label for="place" class="col-lg-4 form-label">Emitent</label>
 
                 <div class="col-lg-8">
-                    <input id="emitent" type="text" class="form-control" name="emitent" v-model="form.emitent">
-                    <span class="text-danger" v-if="form.errors.has('emitent')" v-text="form.errors.get('emitent')"></span>
+                    <input id="place" type="text" class="form-control" name="place" v-model="form.place">
+                    <span class="text-danger" v-if="form.errors.has('place')" v-text="form.errors.get('place')"></span>
 
                 </div>
             </div>
@@ -87,8 +87,8 @@
                     titular: '',
                     serie: '',
                     numar: '',
-                    judet: '',
-                    emitent: '',
+                    region: '',
+                    place: '',
                     viza: '',
                 })
             }
