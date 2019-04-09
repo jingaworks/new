@@ -4,11 +4,11 @@
         <form @submit.prevent="formSubmit" @keydown="form.errors.clear($event.target.name)">
 
             <div class="form-group row">
-                <label for="nume" class="col-lg-4 form-label">Nume Juridic</label>
+                <label for="name" class="col-lg-4 form-label">Nume Juridic</label>
 
                 <div class="col-lg-8">
-                    <input id="nume" type="text" class="form-control" name="nume" v-model="form.nume">
-                    <span class="text-danger" v-if="form.errors.has('nume')" v-text="form.errors.get('nume')"></span>
+                    <input id="name" type="text" class="form-control" name="name" v-model="form.name">
+                    <span class="text-danger" v-if="form.errors.has('name')" v-text="form.errors.get('name')"></span>
 
                 </div>
             </div>
@@ -82,7 +82,7 @@
 
             return {
                 form: new Form({
-                    nume: '',
+                    name: '',
                     cui: '',
                     phone: '',
                     region: '',
@@ -94,7 +94,7 @@
 
         methods: {
             formSubmit() {
-                this.form.submit('post', '/cont/companie/creaza')
+                this.form.submit('post', '/cont/companie/creaza','/cont/date-companie')
                     .then(data => console.log(data))
                     .catch(errors => console.log(errors));
             }

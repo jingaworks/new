@@ -96,7 +96,7 @@
 
         methods: {
             formSubmit() {
-                this.form.submit('post', '/cont/producator/creaza')
+                this.form.submit('post', '/cont/producator/creaza','/cont/date-producator')
                     .then(data => console.log(data))
                     .catch(errors => console.log(errors));
             }

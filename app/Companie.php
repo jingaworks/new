@@ -14,7 +14,7 @@ class Companie extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'cui', 'region', 'place', 'address', 'producator_id', 
+        'name', 'cui', 'phone', 'region', 'place', 'address', 'producator_id', 
     ];
 
     public function producator() {

@@ -3,20 +3,21 @@
 namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
-use App\Region;
-use App\Place;
+use App\Producator;
 
-class ValidPlace implements Rule
+class ValidNumber implements Rule
 {
-    private $reg;
+    private $serie;
+    private $numar;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($reg)
+    public function __construct($serie, $numar)
     {
-        $this->reg = $reg;
+        $this->serie = $serie;
+        $this->numar = $numar;
     }
 
     /**
@@ -28,10 +29,9 @@ class ValidPlace implements Rule
      */
     public function passes($attribute, $value)
     {
-        $place = Place::where('denloc', $value)->first();
-        $region = Region::where('denj', $this->reg)->first();
+        $result = Producator::where('serie', $this->serie)->where('numar', $this->numar)->first();
 
-        return ($region && $place) && ($place->jud == $region->id) ? true : false;
+        return $result ? false : true;
     }
 
     /**
@@ -41,6 +41,6 @@ class ValidPlace implements Rule
      */
     public function message()
     {
-        return 'Localitatea aleasa nu face parte din Judetul ' . $this->reg;
+        return $this->serie . ' ' . $this->numar . ' este in uz!';
     }
 }

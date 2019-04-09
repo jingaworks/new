@@ -49,19 +49,19 @@
                                     </div>
                                 </div>
 
-<div class="form-group row">
-    <label for="phone" class="col-lg-4 form-label">{{ __('Telefon') }}</label>
+                                <div class="form-group row">
+                                    <label for="phone" class="col-lg-4 form-label">{{ __('Telefon') }}</label>
 
-    <div class="col-lg-8">
-        <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
+                                    <div class="col-lg-8">
+                                        <input id="phone" type="text" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}" required>
 
-        @if ($errors->has('phone'))
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $errors->first('phone') }}</strong>
-            </span>
-        @endif
-    </div>
-</div>
+                                        @if ($errors->has('phone'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('phone') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
 
                                 <div class="form-group row">
                                     <label for="region" class="col-lg-4 form-label">{{ __('Judet') }}</label>

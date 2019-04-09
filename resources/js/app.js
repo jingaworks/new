@@ -29,6 +29,7 @@ window.Form = Form;
 Vue.component('adauga-producator', require('./components/AdaugaProducator.vue').default);
 Vue.component('editeaza-producator', require('./components/EditeazaProducator.vue').default);
 Vue.component('adauga-companie', require('./components/AdaugaCompanie.vue').default);
+Vue.component('editeaza-companie', require('./components/EditeazaCompanie.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

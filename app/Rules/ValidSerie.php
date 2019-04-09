@@ -4,9 +4,8 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use App\Region;
-use App\Place;
 
-class ValidPlace implements Rule
+class ValidSerie implements Rule
 {
     private $reg;
     /**
@@ -28,10 +27,9 @@ class ValidPlace implements Rule
      */
     public function passes($attribute, $value)
     {
-        $place = Place::where('denloc', $value)->first();
         $region = Region::where('denj', $this->reg)->first();
 
-        return ($region && $place) && ($place->jud == $region->id) ? true : false;
+        return ($region) && ($value == $region->mnemonic) ? true : false;
     }
 
     /**
@@ -41,6 +39,6 @@ class ValidPlace implements Rule
      */
     public function message()
     {
-        return 'Localitatea aleasa nu face parte din Judetul ' . $this->reg;
+        return 'Seria aleasa nu face parte din Judetul ' . $this->reg;
     }
 }

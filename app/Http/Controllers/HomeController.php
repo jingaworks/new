@@ -35,4 +35,14 @@ class HomeController extends Controller
     {
         return view('cont.dashboard');
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function showSettings()
+    {
+        return view('cont.settings');
+    }
 }

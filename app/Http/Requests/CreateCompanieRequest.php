@@ -7,7 +7,7 @@ use App\Rules\CuiNumber;
 use App\Rules\PhoneNumber;
 use App\Rules\ValidPlace;
 
-class CreateCustomerRequest extends FormRequest
+class CreateCompanieRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,8 +28,8 @@ class CreateCustomerRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'min:3', 'max:100'],
-            'cui' => ['required', 'unique:customers', 'digits_between:2,10', new CuiNumber],
-            'phone' => ['required', 'unique:customers', new PhoneNumber],
+            'cui' => ['required', 'unique:companii', 'digits_between:2,10', new CuiNumber],
+            'phone' => ['required', 'unique:companii', new PhoneNumber],
             'region' => ['required', 'string', 'max:70', 'exists:regions,denj'],
             'place' => ['required', 'string', 'max:70', 'exists:places,denloc', new ValidPlace($this->region)],
             'address' => ['required', 'string', 'min:5', 'max:300'],

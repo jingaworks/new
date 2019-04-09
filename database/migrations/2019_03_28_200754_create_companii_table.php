@@ -21,6 +21,7 @@ class CreateCompaniiTable extends Migration
             $table->string('region', 100);
             $table->string('place', 100);
             $table->string('address', 190)->nullable();
+            $table->boolean('verified')->default(false);
             $table->unsignedBigInteger('producator_id');
             $table->timestamps();
 

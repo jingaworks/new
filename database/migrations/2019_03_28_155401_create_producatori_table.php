@@ -21,6 +21,7 @@ class CreateProducatoriTable extends Migration
             $table->string('region', 100);
             $table->string('place', 100);
             $table->year('viza');
+            $table->boolean('verified')->default(false);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 

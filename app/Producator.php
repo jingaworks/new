@@ -26,6 +26,11 @@ class Producator extends Model
         return $this->hasOne(Companie::class);
     }
 
+    public function produse()
+    {
+        return $this->belongsToMany(Subcategory::class);
+    }
+
 
     public function getNumarCertificatAttribute() {
         return $this->serie . '-' . $this->numar;

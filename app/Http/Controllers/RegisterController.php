@@ -38,7 +38,7 @@ class RegisterController extends Controller
     {
         auth()->user()->producator()->create($request->all());
         
-        return ['message' => 'Atestatul de Producator adaugat cu succes!'];
+        return redirect()->route('dashboard')->with('status', 'Atestatul de Producator adaugat cu succes!');
     }
 
     /**

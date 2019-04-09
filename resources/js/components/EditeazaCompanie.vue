@@ -6,31 +6,31 @@
                 <form @submit.prevent="formSubmit" @keydown="form.errors.clear($event.target.name)">
 
                     <div class="form-group row">
-                        <label for="titular" class="col-lg-4 form-label">Titular</label>
+                        <label for="name" class="col-lg-4 form-label">Nume Societate</label>
 
                         <div class="col-lg-8">
-                            <input id="titular" type="text" class="form-control" name="titular" v-model="form.titular" :disabled="form.verified == 1">
-                            <span class="text-danger" v-if="form.errors && form.errors.has('titular')" v-text="form.errors.get('titular')"></span>
+                            <input id="name" type="text" class="form-control" name="name" v-model="form.name" :disabled="form.verified == 1">
+                            <span class="text-danger" v-if="form.errors && form.errors.has('name')" v-text="form.errors.get('name')"></span>
 
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="serie" class="col-lg-4 form-label">Serie</label>
+                        <label for="cui" class="col-lg-4 form-label">CUI/CIF</label>
 
                         <div class="col-lg-8">
-                            <input id="serie" type="text" class="form-control" name="serie" v-model="form.serie" :disabled="form.verified == 1">
-                            <span class="text-danger" v-if="form.errors && form.errors.has('serie')" v-text="form.errors.get('serie')"></span>
+                            <input id="cui" type="text" class="form-control" name="cui" v-model="form.cui" :disabled="form.verified == 1">
+                            <span class="text-danger" v-if="form.errors && form.errors.has('cui')" v-text="form.errors.get('cui')"></span>
 
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="numar" class="col-lg-4 form-label">Numar</label>
+                        <label for="phone" class="col-lg-4 form-label">Telefon</label>
 
                         <div class="col-lg-8">
-                            <input id="numar" type="text" class="form-control" name="numar" v-model="form.numar" :disabled="form.verified == 1">
-                            <span class="text-danger" v-if="form.errors && form.errors.has('numar')" v-text="form.errors.get('numar')"></span>
+                            <input id="phone" type="text" class="form-control" name="phone" v-model="form.phone">
+                            <span class="text-danger" v-if="form.errors && form.errors.has('phone')" v-text="form.errors.get('phone')"></span>
 
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                         <label for="region" class="col-lg-4 form-label">Judet</label>
 
                         <div class="col-lg-8">
-                            <input id="region" type="text" class="form-control" name="region" v-model="form.region" :disabled="form.verified == 1">
+                            <input id="region" type="text" class="form-control" name="region" v-model="form.region">
                             <span class="text-danger" v-if="form.errors && form.errors.has('region')" v-text="form.errors.get('region')"></span>
 
                         </div>
@@ -49,21 +49,19 @@
                         <label for="place" class="col-lg-4 form-label">Emitent</label>
 
                         <div class="col-lg-8">
-                            <input id="place" type="text" class="form-control" name="place" v-model="form.place" :disabled="form.verified == 1">
+                            <input id="place" type="text" class="form-control" name="place" v-model="form.place">
                             <span class="text-danger" v-if="form.errors && form.errors.has('place')" v-text="form.errors.get('place')"></span>
 
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="viza" class="col-lg-4 form-label">Anul vizat</label>
+                        <label for="viza" class="col-lg-4 form-label">Adresa</label>
 
                         <div class="col-lg-8">
-                            <select id="viza" class="form-control" name="viza" v-model="form.viza">
-                                <option value="2019">2019</option>
-                                <option value="2020">2020</option>
-                            </select>
-                            <span class="text-danger" v-if="form.errors && form.errors.has('viza')" v-text="form.errors.get('viza')"></span>
+                            <textarea name="address" id="address" cols="30" rows="3" class="form-control" v-model="form.address"></textarea>
+                            <span class="text-danger" v-if="form.errors && form.errors.has('address')" v-text="form.errors.get('address')"></span>
+
                         </div>
                     </div>
 
@@ -92,12 +90,12 @@
 
             return {
                 form: {
-                    titular: '',
-                    serie: '',
-                    numar: '',
+                    name: '',
+                    cui: '',
+                    phone: '',
                     region: '',
                     place: '',
-                    viza: '',
+                    address: '',
                     verified: '',
                 }
             }
@@ -105,7 +103,7 @@
 
         methods: {
             formSubmit() {
-                this.form.submit('post', '/cont/editeaza-producator','/cont/date-producator')
+                this.form.submit('post', '/cont/editeaza-companie','/cont/date-companie')
                     .then((data) => {
                         console.log(data)
                     })
@@ -113,10 +111,10 @@
             },
             
             getDataForm() {
-                axios.get('/cont/json-producator')
+                axios.get('/cont/json-companie')
                     .then(response => {
                         this.form = new Form(
-                            response.data.producator
+                            response.data.companie
                         )
                     })
                     .catch(error => {

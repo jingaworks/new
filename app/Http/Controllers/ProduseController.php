@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateCompanieRequest;
 
-class CompanieController extends Controller
+class ProduseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,11 @@ class CompanieController extends Controller
      */
     public function index()
     {
-        //
+
+        $produse = auth()->user()->producator->produse()->with('category')->get();
+
+        // dd($produse);
+        return view('cont.produse.index', compact('produse'));
     }
 
     /**
@@ -44,14 +47,9 @@ class CompanieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-        $data = auth()->user()->producator->companie;
-
-        if(!$data)
-            return redirect()->route('cont.adauga.companie')->with('status', 'Adauga date Companie');
-
-        return view('cont.companie.show', compact(['data']));
+        //
     }
 
     /**
@@ -60,27 +58,9 @@ class CompanieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        $data = auth()->user()->producator->companie;
-
-        if(!$data)
-            return redirect()->route('cont.adauga.companie')->with('status', 'Adauga date Companie');
-
-        return view('cont.companie.edit', compact(['data']));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function getDataForm()
-    {
-        $data = auth()->user()->producator->companie->only(['name', 'cui', 'phone', 'region', 'place', 'address', 'verified']);
-
-        return ['companie' => $data];
+        //
     }
 
     /**
@@ -90,13 +70,9 @@ class CompanieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $companie = auth()->user()->producator->companie;
-
-        $companie->update($request->all());
-
-        return ['message' => 'Date companie editate cu succes'];
+        //
     }
 
     /**
