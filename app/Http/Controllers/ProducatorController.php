@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateProducatorRequest;
+use App\Http\Requests\UpdateProducatorRequest;
 
 class ProducatorController extends Controller
 {
@@ -13,27 +14,6 @@ class ProducatorController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
     {
         //
     }
@@ -87,7 +67,7 @@ class ProducatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateProducatorRequest $request)
+    public function update(UpdateProducatorRequest $request)
     {
         $producator = auth()->user()->producator;
 

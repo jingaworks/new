@@ -18,4 +18,9 @@ class Subcategory extends Model
     public function category() {
         return $this->belongsTo(Category::class);
     }
+
+    public function producator()
+    {
+        return $this->belongsToMany(Producator::class);
+    }
 }

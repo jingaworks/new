@@ -30,6 +30,7 @@ Vue.component('adauga-producator', require('./components/AdaugaProducator.vue').
 Vue.component('editeaza-producator', require('./components/EditeazaProducator.vue').default);
 Vue.component('adauga-companie', require('./components/AdaugaCompanie.vue').default);
 Vue.component('editeaza-companie', require('./components/EditeazaCompanie.vue').default);
+Vue.component('produse-producator', require('./components/ProduseProducator.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -37,6 +38,14 @@ Vue.component('editeaza-companie', require('./components/EditeazaCompanie.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import Toasted from 'vue-toasted';
+
+Vue.use(Toasted)
+
+// register modal component
+Vue.component('modal', {
+    template: '#modal-template'
+})
 const app = new Vue({
     el: '#wrapper'
 });

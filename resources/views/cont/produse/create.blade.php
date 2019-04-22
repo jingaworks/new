@@ -6,11 +6,7 @@
         <div class="col-lg-12">
             <div class="row py-3">
                 <div class="col-lg-12">
-                    @if(count($data) > 0)
-                        <a class="btn btn-info btn-block" href="{{ route('cont.editeaza.produse') }}">Modifica Produse</a>
-                    @else
-                        <a class="btn btn-info btn-block" href="{{ route('cont.editeaza.produse') }}">Adauga Produse</a>   
-                    @endif
+                    <a class="btn btn-info btn-block" href="{{ route('cont.arata.produse') }}">Modifica Produse</a>
                 </div>
             </div>
             <div class="card">
@@ -29,16 +25,16 @@
                     <div class="row">
                         <div class="col-lg-12">
                             @if(count($data))
-                                @foreach($data as $c => $produs)
-                                    <ul>
-                                        <li>{{ $c }}</li>
+                                <ul>
+                                    @foreach($data as $c)
+                                        <li>{{ $c->nume }}</li>
                                         <ul>
-                                            @foreach($produs as $p)
-                                                <li class="alert alert-success">{{ $p->nume }}</li>
+                                            @foreach($c->subcategorii as $p)
+                                                <li class="alert @if( in_array($p->id, $current) ) alert-success @endif">{{ $p->nume }}</li>
                                             @endforeach
                                         </ul>
-                                    </ul>
-                                @endforeach
+                                    @endforeach
+                                </ul>
                             @endif
                         </div>
                     </div>

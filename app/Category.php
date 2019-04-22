@@ -15,7 +15,7 @@ class Category extends Model
         'nume', 'slug', 'descriere', 'active', 'user_id', 'activated_by', 'activated_at', 
     ];
 
-    public function subcategoires() {
-        return $this->hasMany(Subcategory::class);
+    public function subcategorii() {
+        return $this->hasMany(Subcategory::class)->orderBy('nume');
     }
 }

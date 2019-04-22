@@ -64,6 +64,28 @@ class Form {
 				})
 		});
 	}
+
+	/**
+	 * Submit the form.
+	 * 
+	 * @param {string} requestType 
+	 * @param {string} url 
+	 */
+	getImage(requestType, url, redirect = null) {
+		return new Promise((resolve, reject) => {
+			axios[requestType](url, this.data())
+				.then(response => {
+					this.onSuccess(response.data, redirect);
+
+					resolve(response.data);
+				})
+				.catch(error => {
+					this.onFail(error.response.data.errors);
+
+					reject(error.response.data.errors);
+				})
+		});
+	}
  
 
 	/**

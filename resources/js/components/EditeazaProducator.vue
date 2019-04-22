@@ -1,8 +1,8 @@
 <template>
-    <div class="col-lg-7 col-md-12 col-sm-12 mb-5">
+    <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
 
         <div class="row" v-if="form.errors">
-            <div class="col-lg-12">
+            <div class="col-lg-7">
                 <form @submit.prevent="formSubmit" @keydown="form.errors.clear($event.target.name)">
 
                     <div class="form-group row">
@@ -67,14 +67,28 @@
                         </div>
                     </div>
 
-                    <div class="form-group row mb-0">
+                    <div class="form-group row">
                         <div class="col-lg-12">
                             <button type="submit" class="btn btn-primary btn-block" :disabled="form.errors && form.errors.any()">
                                 Editeaza Datele
                             </button>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12">
+                            <a href="/cont/date-producator" class="btn btn-danger btn-block">
+                                Anuleaza
+                            </a>
+                        </div>
+                    </div>
                 </form>
+            </div>
+            <div class="col-lg-5">
+                <img id="show-modal" :src="imageLink" class="img-thumbnail" @click="showModal = true">
+                <!-- use the modal component, pass in the prop -->
+                <modal v-if="showModal" @close="showModal = false">
+                    <img slot="body" :src="imageLink" class="rounded mx-auto d-block" @click="showModal = false">
+                </modal>
             </div>
         </div>
         <div class="row" v-else>
@@ -99,7 +113,9 @@
                     place: '',
                     viza: '',
                     verified: '',
-                }
+                },
+                imageLink: '',
+                showModal: false,
             }
         },
 
@@ -122,12 +138,90 @@
                     .catch(error => {
                         console.log(error)
                     })
+            },
+
+            setImage() {
+                axios.post('/cont/producator/atestat', this.form)
+                    .then(response => {
+                        this.imageLink = '/storage/atestate/' + response.data.link  + '?time=' + new Date().getTime()
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
             }
         },
 
         mounted() {
             this.getDataForm()
-            console.log('Component mounted.')
+        },
+
+        watch: {
+            form: {
+                handler(val){
+                    this.setImage()
+                },
+                deep: true
+            }
         }
     }
 </script>
+
+<style scoped>
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .5);
+  display: table;
+  transition: opacity .3s ease;
+}
+
+.modal-wrapper {
+  display: flex;
+}
+
+.modal-container {
+  width: 100%;
+  padding: 20px 30px;
+  transition: all .3s ease;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+
+.modal-body img {  
+    height: 85vh;
+}
+.modal-footer {
+    margin: 0 auto;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+</style>
+

@@ -9,15 +9,17 @@ class ValidNumber implements Rule
 {
     private $serie;
     private $numar;
+    private $id;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct($serie, $numar)
+    public function __construct($serie, $numar, $id = null)
     {
         $this->serie = $serie;
         $this->numar = $numar;
+        $this->id = $id;
     }
 
     /**
@@ -30,7 +32,9 @@ class ValidNumber implements Rule
     public function passes($attribute, $value)
     {
         $result = Producator::where('serie', $this->serie)->where('numar', $this->numar)->first();
-
+        if ($this->id) {
+            return ($result && $result->id != $this->id) ? false : true;
+        }
         return $result ? false : true;
     }
 

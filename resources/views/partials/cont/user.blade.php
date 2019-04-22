@@ -38,8 +38,17 @@
                                 @endif
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('cont.arata.settings') }}">Setari</a>
+                        <li class="nav-item dropup">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUserMenu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Setari
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownUserMenu">
+                                <a class="dropdown-item" href="{{ route('cont.settings.show') }}">Setari</a>
+                                @if(auth()->user()->producator && count(auth()->user()->producator->subcategorii) > 0)
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('cont.settings.subcategory.show') }}">Propriile Produse</a>
+                                @endif
+                            </div>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0 d-sm-none">

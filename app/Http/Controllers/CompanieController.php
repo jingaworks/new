@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateCompanieRequest;
+use App\Http\Requests\UpdateCompanieRequest;
 
 class CompanieController extends Controller
 {
@@ -63,10 +64,6 @@ class CompanieController extends Controller
     public function edit()
     {
         $data = auth()->user()->producator->companie;
-
-        if(!$data)
-            return redirect()->route('cont.adauga.companie')->with('status', 'Adauga date Companie');
-
         return view('cont.companie.edit', compact(['data']));
     }
 
@@ -90,11 +87,14 @@ class CompanieController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(UpdateCompanieRequest $request)
     {
         $companie = auth()->user()->producator->companie;
-
-        $companie->update($request->all());
+        if ($companie->verified) {
+            $companie->update($request->only(['phone','region','place','address']));
+        } else {
+            $companie->update($request->all());
+        }
 
         return ['message' => 'Date companie editate cu succes'];
     }
