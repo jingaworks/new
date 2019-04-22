@@ -4,7 +4,7 @@
 
     <div class="col-lg-12">
 
-        <form @submit.prevent="onSubmit">
+        <form @submit.prevent="newProducts">
             <div v-for="category in categories" :key="category.id" class="row">
               <div class="col-lg-12">
 
@@ -37,11 +37,17 @@
               </div>
             </div>
 
-            <!-- <div class="field is-grouped is-grouped-centered">
-              <p class="control">
-                <input type="submit" class="btn btn-info btn-block" value="Inregistreaza datele">
-              </p>
-            </div> -->
+            <div class="form-group row">
+              <div class="col-lg-12 pb-3">
+                <hr>
+              </div>
+                <div class="col-lg-12 mb-3">
+                    <input class="form-control" type="text" name="new_category" v-model="newCategory" placeholder="Adauga Categorie noua">
+                </div>
+                <div class="col-lg-12">
+                    <button type="button" :disabled="!newCategory" class="btn btn-info btn-block" @click="addCategory">Adauga Categorie</button>
+                </div>
+            </div>
 
         </form>
     </div>
@@ -53,26 +59,16 @@ export default {
   data() {
     return {
       categories: [],
-      newProduct: [],
+      newCategory: null,
       selectedProducts: [],
+      newProduct: [],
       currentProduct: null
     };
   },
 
-  created() {
-    this.getData();
-  },
-
-  watch: {
-    selectedProducts() {
-      this.onSubmit()
-    }
-  },
-
   methods: {
-
-    onSubmit() {
-      axios.post('/cont/produse_json', { produse: this.selectedProducts , current: this.currentProduct})
+    syncProducts() {
+      axios.post('/cont/produse_json', { products: this.selectedProducts , current: this.currentProduct})
         .then((response) => {
           if(this.currentProduct) {
             if(response.data.new) {
@@ -81,7 +77,6 @@ export default {
                               position: "top-right", 
                               duration : 2000
                             })
-              // this.$toasted.success(response.data.msg).goAway(1500)
             } else {
               this.$toasted.info(response.data.msg, { 
                               theme: "outline", 
@@ -90,24 +85,57 @@ export default {
                             })
             }
           }
-
             this.currentProduct = null
         })
         .catch((error) => {
-            this.$toasted.show(error.data).goAway(1500)
+            this.$toasted.error(error.data, { action : {
+                              text : 'X',
+                              onClick : (e, toastObject) => {
+                                  toastObject.goAway(0);
+                              }
+                          }}).goAway(5000)
         })
     },
 
-    addProduct(id) {
-      console.log(this.newProduct[id])
-      axios.post('/cont/agauga-produs', { category: id, nume: this.newProduct[id] })
+    addCategory() {
+      axios.post('/cont/adauga-categorie', { category: this.newCategory })
         .then((response) => {
-          this.newProduct = [];
-          this.$toasted.success(response.data).goAway(3000)
+          this.newCategory = null;
+          this.$toasted.show(response.data, { 
+                          theme: "outline", 
+                          position: "top-right", 
+                          duration : 3000
+                        })
           this.getData();
         })
         .catch((error) => {
-            this.$toasted.show(error.response.data.errors.name[0]).goAway(2500)
+            this.$toasted.show(error.response.data.errors.category[0], { action : {
+                              text : 'X',
+                              onClick : (e, toastObject) => {
+                                  toastObject.goAway(0);
+                              }
+                          }}).goAway(5000)
+        });
+    },
+
+    addProduct(id) {
+      axios.post('/cont/adauga-produs', { category: id, product: this.newProduct[id] })
+        .then((response) => {
+          this.newProduct = [];
+          this.$toasted.show(response.data, { 
+                          theme: "outline", 
+                          position: "top-right", 
+                          duration : 3000
+                        })
+          this.getData();
+        })
+        .catch((error) => {
+            this.$toasted.error(error.response.data.errors.product[0], { action : {
+                              text : 'X',
+                              onClick : (e, toastObject) => {
+                                  toastObject.goAway(0);
+                              }
+                          }}).goAway(5000)
         });
     },
 
@@ -125,6 +153,18 @@ export default {
     check: function(e) {
       this.currentProduct = e.target
       if (e.target.checked) {
+      }
+    }
+  },
+
+  created() {
+    this.getData();
+  },
+
+  watch: {
+    selectedProducts() {
+      if(this.currentProduct) {
+        this.syncProducts()
       }
     }
   }

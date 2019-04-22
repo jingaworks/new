@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Category;
 use App\Subcategory;
+use App\Http\Requests\NewCategoryRequest;
+use App\Http\Requests\NewSubcategoryRequest;
+use App\Http\Requests\SyncSubcategoryRequest;
 
 class ProduseController extends Controller
 {
@@ -32,14 +35,25 @@ class ProduseController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display the specified resource.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function newCategory(NewCategoryRequest $request)
     {
-        //
+        return $request->category;
+        // add NewCategoryRequest
+
+        // $category = Category::findOrfail($request->category);
+        // $category->subcategorii()->create([
+        //     'nume' => $request->nume,
+        //     'slug' => str_slug($request->nume),
+        //     'descriere' => 'added with Vue',
+        //     'user_id' => auth()->user()->id
+        // ]);
+
+        // return $request->nume . ' a fost adaugat cu succes!';
     }
 
     /**
@@ -48,12 +62,14 @@ class ProduseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function new(Request $request)
+    public function newSubcategory(NewSubcategoryRequest $request)
     {
+        // add NewSubcategoryRequest
+
         $category = Category::findOrfail($request->category);
         $category->subcategorii()->create([
-            'nume' => $request->nume,
-            'slug' => str_slug($request->nume),
+            'nume' => $request->product,
+            'slug' => str_slug($request->product),
             'descriere' => 'added with Vue',
             'user_id' => auth()->user()->id
         ]);
@@ -105,18 +121,19 @@ class ProduseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function storeProduse(Request $request)
+    public function syncProducts(SyncSubcategoryRequest $request)
     {
         $user = auth()->user();
-        $user->producator->produse()->sync($request->produse);
+        $user->producator->produse()->sync($request->products);
+        $current = null;
         if ($request->current) {
             $current = Subcategory::find($request->current)->first();
         }
         
-        if (in_array($request->current['_value'], $request->produse))
-            return $request->current ? ['new' => true, 'msg' => $current['nume'] . ' a fost adaugat la produsele oferite!'] : '';
+        if (in_array($request->current['_value'], $request->products))
+            return $current ? ['new' => true, 'msg' => $current['nume'] . ' a fost adaugat la produsele oferite!'] : '';
 
-        return $request->current ? ['new' => false, 'msg' => $current['nume'] . ' a fost scos din produsele oferite!'] : '';
+        return $current ? ['new' => false, 'msg' => $current['nume'] . ' a fost scos din produsele oferite!'] : '';
         
     }
 

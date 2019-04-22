@@ -2377,29 +2377,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       categories: [],
-      newProduct: [],
+      newCategory: null,
       selectedProducts: [],
+      newProduct: [],
       currentProduct: null
     };
   },
-  created: function created() {
-    this.getData();
-  },
-  watch: {
-    selectedProducts: function selectedProducts() {
-      this.onSubmit();
-    }
-  },
   methods: {
-    onSubmit: function onSubmit() {
+    syncProducts: function syncProducts() {
       var _this = this;
 
       axios.post('/cont/produse_json', {
-        produse: this.selectedProducts,
+        products: this.selectedProducts,
         current: this.currentProduct
       }).then(function (response) {
         if (_this.currentProduct) {
@@ -2408,8 +2407,7 @@ __webpack_require__.r(__webpack_exports__);
               theme: "outline",
               position: "top-right",
               duration: 2000
-            }); // this.$toasted.success(response.data.msg).goAway(1500)
-
+            });
           } else {
             _this.$toasted.info(response.data.msg, {
               theme: "outline",
@@ -2421,32 +2419,75 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.currentProduct = null;
       }).catch(function (error) {
-        _this.$toasted.show(error.data).goAway(1500);
+        _this.$toasted.error(error.data, {
+          action: {
+            text: 'X',
+            onClick: function onClick(e, toastObject) {
+              toastObject.goAway(0);
+            }
+          }
+        }).goAway(5000);
       });
     },
-    addProduct: function addProduct(id) {
+    addCategory: function addCategory() {
       var _this2 = this;
 
-      console.log(this.newProduct[id]);
-      axios.post('/cont/agauga-produs', {
-        category: id,
-        nume: this.newProduct[id]
+      axios.post('/cont/adauga-categorie', {
+        category: this.newCategory
       }).then(function (response) {
-        _this2.newProduct = [];
+        _this2.newCategory = null;
 
-        _this2.$toasted.success(response.data).goAway(3000);
+        _this2.$toasted.show(response.data, {
+          theme: "outline",
+          position: "top-right",
+          duration: 3000
+        });
 
         _this2.getData();
       }).catch(function (error) {
-        _this2.$toasted.show(error.response.data.errors.name[0]).goAway(2500);
+        _this2.$toasted.show(error.response.data.errors.category[0], {
+          action: {
+            text: 'X',
+            onClick: function onClick(e, toastObject) {
+              toastObject.goAway(0);
+            }
+          }
+        }).goAway(5000);
+      });
+    },
+    addProduct: function addProduct(id) {
+      var _this3 = this;
+
+      axios.post('/cont/adauga-produs', {
+        category: id,
+        product: this.newProduct[id]
+      }).then(function (response) {
+        _this3.newProduct = [];
+
+        _this3.$toasted.show(response.data, {
+          theme: "outline",
+          position: "top-right",
+          duration: 3000
+        });
+
+        _this3.getData();
+      }).catch(function (error) {
+        _this3.$toasted.error(error.response.data.errors.product[0], {
+          action: {
+            text: 'X',
+            onClick: function onClick(e, toastObject) {
+              toastObject.goAway(0);
+            }
+          }
+        }).goAway(5000);
       });
     },
     getData: function getData() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get('/cont/produse_json').then(function (response) {
-        _this3.categories = response.data.categories;
-        _this3.selectedProducts = response.data.current.map(function (obj) {
+        _this4.categories = response.data.categories;
+        _this4.selectedProducts = response.data.current.map(function (obj) {
           return obj.id;
         });
       }).catch(function (error) {
@@ -2457,6 +2498,16 @@ __webpack_require__.r(__webpack_exports__);
       this.currentProduct = e.target;
 
       if (e.target.checked) {}
+    }
+  },
+  created: function created() {
+    this.getData();
+  },
+  watch: {
+    selectedProducts: function selectedProducts() {
+      if (this.currentProduct) {
+        this.syncProducts();
+      }
     }
   }
 });
@@ -22562,162 +22613,217 @@ var render = function() {
           on: {
             submit: function($event) {
               $event.preventDefault()
-              return _vm.onSubmit($event)
+              return _vm.newProducts($event)
             }
           }
         },
-        _vm._l(_vm.categories, function(category) {
-          return _c("div", { key: category.id, staticClass: "row" }, [
-            _c("div", { staticClass: "col-lg-12" }, [
-              _c("div", { staticClass: "col-lg-12 pb-3" }, [
-                _c("h2", [_vm._v(_vm._s(category.nume))])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group row" },
-                _vm._l(category.subcategorii, function(product) {
-                  return _c(
-                    "div",
-                    { key: product.id, staticClass: "col-lg-4 px-4" },
-                    [
-                      _c("div", { staticClass: "field" }, [
-                        _c(
-                          "div",
-                          {
-                            class: {
-                              selectedBox: _vm.selectedProducts.includes(
-                                product.id
-                              )
-                            }
-                          },
-                          [
-                            _c("label", { staticClass: "form-label" }, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.selectedProducts,
-                                    expression: "selectedProducts"
-                                  }
-                                ],
-                                attrs: { type: "checkbox", name: product.id },
-                                domProps: {
-                                  value: product.id,
-                                  checked: _vm.selectedProducts.includes(
-                                    product.id
-                                  ),
-                                  checked: Array.isArray(_vm.selectedProducts)
-                                    ? _vm._i(_vm.selectedProducts, product.id) >
-                                      -1
-                                    : _vm.selectedProducts
-                                },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.check($event)
-                                  },
-                                  change: function($event) {
-                                    var $$a = _vm.selectedProducts,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = product.id,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          (_vm.selectedProducts = $$a.concat([
-                                            $$v
-                                          ]))
-                                      } else {
-                                        $$i > -1 &&
-                                          (_vm.selectedProducts = $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1)))
-                                      }
-                                    } else {
-                                      _vm.selectedProducts = $$c
-                                    }
-                                  }
-                                }
-                              }),
-                              _vm._v(
-                                "\n                                      " +
-                                  _vm._s(product.nume) +
-                                  "\n                                  "
-                              )
-                            ])
-                          ]
-                        )
-                      ])
-                    ]
-                  )
-                }),
-                0
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-lg-6 mb-3" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.newProduct[category.id],
-                        expression: "newProduct[category.id]"
-                      }
-                    ],
-                    key: category.id,
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      name: category.id,
-                      placeholder: "Adauga produs nou"
-                    },
-                    domProps: { value: _vm.newProduct[category.id] },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.newProduct,
-                          category.id,
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
+        [
+          _vm._l(_vm.categories, function(category) {
+            return _c("div", { key: category.id, staticClass: "row" }, [
+              _c("div", { staticClass: "col-lg-12" }, [
+                _c("div", { staticClass: "col-lg-12 pb-3" }, [
+                  _c("h2", [_vm._v(_vm._s(category.nume))])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-lg-6" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-warning btn-block",
+                _c(
+                  "div",
+                  { staticClass: "form-group row" },
+                  _vm._l(category.subcategorii, function(product) {
+                    return _c(
+                      "div",
+                      { key: product.id, staticClass: "col-lg-4 px-4" },
+                      [
+                        _c("div", { staticClass: "field" }, [
+                          _c(
+                            "div",
+                            {
+                              class: {
+                                selectedBox: _vm.selectedProducts.includes(
+                                  product.id
+                                )
+                              }
+                            },
+                            [
+                              _c("label", { staticClass: "form-label" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.selectedProducts,
+                                      expression: "selectedProducts"
+                                    }
+                                  ],
+                                  attrs: { type: "checkbox", name: product.id },
+                                  domProps: {
+                                    value: product.id,
+                                    checked: _vm.selectedProducts.includes(
+                                      product.id
+                                    ),
+                                    checked: Array.isArray(_vm.selectedProducts)
+                                      ? _vm._i(
+                                          _vm.selectedProducts,
+                                          product.id
+                                        ) > -1
+                                      : _vm.selectedProducts
+                                  },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.check($event)
+                                    },
+                                    change: function($event) {
+                                      var $$a = _vm.selectedProducts,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = product.id,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            (_vm.selectedProducts = $$a.concat([
+                                              $$v
+                                            ]))
+                                        } else {
+                                          $$i > -1 &&
+                                            (_vm.selectedProducts = $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1)))
+                                        }
+                                      } else {
+                                        _vm.selectedProducts = $$c
+                                      }
+                                    }
+                                  }
+                                }),
+                                _vm._v(
+                                  "\n                                      " +
+                                    _vm._s(product.nume) +
+                                    "\n                                  "
+                                )
+                              ])
+                            ]
+                          )
+                        ])
+                      ]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("div", { staticClass: "col-lg-6 mb-3" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newProduct[category.id],
+                          expression: "newProduct[category.id]"
+                        }
+                      ],
+                      key: category.id,
+                      staticClass: "form-control",
                       attrs: {
-                        type: "button",
-                        disabled: !_vm.newProduct[category.id]
+                        type: "text",
+                        name: category.id,
+                        placeholder: "Adauga produs nou"
                       },
+                      domProps: { value: _vm.newProduct[category.id] },
                       on: {
-                        click: function($event) {
-                          return _vm.addProduct(category.id)
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.newProduct,
+                            category.id,
+                            $event.target.value
+                          )
                         }
                       }
-                    },
-                    [_vm._v("Adauga produs in " + _vm._s(category.nume))]
-                  )
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-6" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-warning btn-block",
+                        attrs: {
+                          type: "button",
+                          disabled: !_vm.newProduct[category.id]
+                        },
+                        on: {
+                          click: function($event) {
+                            return _vm.addProduct(category.id)
+                          }
+                        }
+                      },
+                      [_vm._v("Adauga produs in " + _vm._s(category.nume))]
+                    )
+                  ])
                 ])
               ])
             ])
+          }),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-12 mb-3" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.newCategory,
+                    expression: "newCategory"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "new_category",
+                  placeholder: "Adauga Categorie noua"
+                },
+                domProps: { value: _vm.newCategory },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.newCategory = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-12" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-info btn-block",
+                  attrs: { type: "button", disabled: !_vm.newCategory },
+                  on: { click: _vm.addCategory }
+                },
+                [_vm._v("Adauga Categorie")]
+              )
+            ])
           ])
-        }),
-        0
+        ],
+        2
       )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-12 pb-3" }, [_c("hr")])
+  }
+]
 render._withStripped = true
 
 

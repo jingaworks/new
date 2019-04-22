@@ -113,10 +113,11 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/produse/adaugate', 'ProduseController@showOwn')->name('cont.settings.subcategory.show');
 
             Route::get('/produse_json', 'ProduseController@json');
-            Route::post('/produse_json', 'ProduseController@storeProduse');
+            Route::post('/produse_json', 'ProduseController@syncProducts');
             Route::get('/produse', 'ProduseController@index')->name('cont.arata.produse');
             Route::get('/produse/creaza', 'ProduseController@create')->name('cont.adauga.produse');
-            Route::post('/agauga-produs', 'ProduseController@new');
+            Route::post('/adauga-categorie', 'ProduseController@newCategory');
+            Route::post('/adauga-produs', 'ProduseController@newSubcategory');
             Route::get('/editeaza-produse', 'ProduseController@edit')->name('cont.editeaza.produse');
             
             Route::get('/json-producator', 'ProducatorController@getDataForm');
@@ -124,7 +125,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/editeaza-producator', 'ProducatorController@edit')->name('cont.editeaza.producator');
             Route::post('/editeaza-producator', 'ProducatorController@update');
             
-            // allowe access to company create routes only if user don't have company
+            // allowe access to company create routes only if user don't have company data
             Route::group(['middleware' => ['companie.restrict']], function () {
                 Route::post('/companie/creaza', 'RegisterController@storeCompanie');
                 Route::get('/companie/creaza', 'RegisterController@createCompanie')->name('cont.adauga.companie');
