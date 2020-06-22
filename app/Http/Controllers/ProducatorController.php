@@ -55,7 +55,7 @@ class ProducatorController extends Controller
      */
     public function getDataForm()
     {
-        $data = auth()->user()->producator->only(['titular', 'serie', 'numar', 'region', 'place', 'viza', 'verified']);
+        $data = auth()->user()->producator->only(['titular', 'serie', 'numar', 'region', 'place', 'viza', 'phone', 'verified']);
 
         return ['producator' => $data];
     }

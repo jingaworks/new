@@ -36,6 +36,16 @@
                     </div>
 
                     <div class="form-group row">
+                        <label for="numar" class="col-lg-4 form-label">Telefon</label>
+
+                        <div class="col-lg-8">
+                            <input id="phone" type="text" class="form-control" name="phone" v-model="form.phone">
+                            <span class="text-danger" v-if="form.errors.has('phone')" v-text="form.errors.get('phone')"></span>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <label for="region" class="col-lg-4 form-label">Judet</label>
 
                         <div class="col-lg-8">
@@ -101,6 +111,7 @@
                     region: '',
                     place: '',
                     viza: '',
+                    phone: '',
                 }),
                 imageLink: '',
                 showModal: false,
