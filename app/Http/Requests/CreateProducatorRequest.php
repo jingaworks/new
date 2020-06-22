@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\PhoneNumber;
 use App\Rules\ValidSerie;
 use App\Rules\ValidNumber;
 use App\Rules\ValidPlace;
@@ -32,7 +33,8 @@ class CreateProducatorRequest extends FormRequest
             'numar' => ['required', 'digits:7', new ValidNumber($this->serie,$this->numar)], 
             'region' => ['required', 'string', 'max:100', 'exists:regions,denj'], 
             'place' => ['required', 'string', 'max:70', 'exists:places,denloc', new ValidPlace($this->region)],
-            'viza' => ['required', 'digits:4', 'starts_with:20']
+            'viza' => ['required', 'digits:4', 'starts_with:20'],
+            'phone' => ['required', 'unique:producatori', new PhoneNumber],
         ];
     }
 }
