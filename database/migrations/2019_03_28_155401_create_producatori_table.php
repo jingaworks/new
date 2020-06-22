@@ -21,10 +21,12 @@ class CreateProducatoriTable extends Migration
             $table->string('region', 100);
             $table->string('place', 100);
             $table->year('viza');
+            $table->string('phone', 10);
             $table->boolean('verified')->default(false);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
+            $table->unique(['phone']);
             $table->unique(['serie', 'numar']);
             $table->foreign('user_id')->references('id')->on('users');
         });

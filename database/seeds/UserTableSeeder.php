@@ -28,6 +28,7 @@ class UserTableSeeder extends Seeder
             'region' => 'Constanta',
             'place' => 'Constanta',
             'viza' => '2019',
+            'phone' => '0735123456',
             'user_id' => $user->id
         ]);
         

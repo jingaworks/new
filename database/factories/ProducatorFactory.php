@@ -10,6 +10,7 @@ $factory->define(Producator::class, function (Faker $faker) {
         'numar' => $faker->numberBetween(1000000, 9999999),
         'place' => $faker->city,
         'region' => $faker->state,
-        'viza' => '2019',
+        'viza' => '2020',
+        'phone' => "07" . $faker->numberBetween(10000000, 99999999),
     ];
 });
