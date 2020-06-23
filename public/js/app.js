@@ -1968,6 +1968,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1977,7 +1987,8 @@ __webpack_require__.r(__webpack_exports__);
         numar: '',
         region: '',
         place: '',
-        viza: ''
+        viza: '',
+        phone: ''
       }),
       imageLink: '',
       showModal: false
@@ -2260,6 +2271,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2270,6 +2291,7 @@ __webpack_require__.r(__webpack_exports__);
         region: '',
         place: '',
         viza: '',
+        phone: '',
         verified: ''
       },
       imageLink: '',
@@ -21580,6 +21602,47 @@ var render = function() {
             _c("div", { staticClass: "form-group row" }, [
               _c(
                 "label",
+                { staticClass: "col-lg-4 form-label", attrs: { for: "numar" } },
+                [_vm._v("Telefon")]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-lg-8" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.phone,
+                      expression: "form.phone"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "phone", type: "text", name: "phone" },
+                  domProps: { value: _vm.form.phone },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "phone", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.form.errors.has("phone")
+                  ? _c("span", {
+                      staticClass: "text-danger",
+                      domProps: {
+                        textContent: _vm._s(_vm.form.errors.get("phone"))
+                      }
+                    })
+                  : _vm._e()
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group row" }, [
+              _c(
+                "label",
                 {
                   staticClass: "col-lg-4 form-label",
                   attrs: { for: "region" }
@@ -22317,6 +22380,55 @@ var render = function() {
                           staticClass: "text-danger",
                           domProps: {
                             textContent: _vm._s(_vm.form.errors.get("numar"))
+                          }
+                        })
+                      : _vm._e()
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group row" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-lg-4 form-label",
+                      attrs: { for: "place" }
+                    },
+                    [_vm._v("Telefon")]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-lg-8" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.phone,
+                          expression: "form.phone"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "phone",
+                        type: "text",
+                        name: "phone",
+                        disabled: _vm.form.verified == 1
+                      },
+                      domProps: { value: _vm.form.phone },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "phone", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.form.errors && _vm.form.errors.has("phone")
+                      ? _c("span", {
+                          staticClass: "text-danger",
+                          domProps: {
+                            textContent: _vm._s(_vm.form.errors.get("phone"))
                           }
                         })
                       : _vm._e()
@@ -35708,8 +35820,8 @@ function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\projects\pdr\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\projects\pdr\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\projects\new\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\projects\new\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
