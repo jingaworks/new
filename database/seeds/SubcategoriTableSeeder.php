@@ -120,7 +120,7 @@ class SubcategoriTableSeeder extends Seeder
         ]);
         
         Subcategory::create([
-            'nume' => 'Lapte-oaie',
+            'nume' => 'Lapte oaie',
             'slug' => 'lapte-oaie',
             'descriere' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut voluptatum aut ullam corrupti voluptate fugiat voluptatibus qui deleniti nulla neque.',
             'category_id' => 3,

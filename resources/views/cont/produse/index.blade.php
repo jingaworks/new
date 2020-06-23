@@ -34,7 +34,11 @@
                                         <li>{{ $c }}</li>
                                         <ul>
                                             @foreach($produs as $p)
-                                                <li class="alert alert-success">{{ $p->nume }}</li>
+                                                <div>
+                                                    <li class="alert alert-success">{{ $p->nume }}
+                                                        <a href="#" class="btn btn-primary btn-sm float-right">Editeaza pagina</a>
+                                                    </li>
+                                                </div>
                                             @endforeach
                                         </ul>
                                     </ul>
