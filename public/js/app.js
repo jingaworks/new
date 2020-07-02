@@ -2281,6 +2281,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2292,7 +2301,9 @@ __webpack_require__.r(__webpack_exports__);
         place: '',
         viza: '',
         phone: '',
-        verified: ''
+        verified: '',
+        suspended: '',
+        suspended_reason: ''
       },
       imageLink: '',
       showModal: false
@@ -2402,9 +2413,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2412,7 +2420,8 @@ __webpack_require__.r(__webpack_exports__);
       newCategory: null,
       selectedProducts: [],
       newProduct: [],
-      currentProduct: null
+      currentProduct: null,
+      owner_id: null
     };
   },
   methods: {
@@ -2512,6 +2521,7 @@ __webpack_require__.r(__webpack_exports__);
         _this4.selectedProducts = response.data.current.map(function (obj) {
           return obj.id;
         });
+        _this4.owner_id = response.data.user_id;
       }).catch(function (error) {
         console.log(error);
       });
@@ -22222,6 +22232,30 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "col-lg-12 col-md-12 col-sm-12 mb-5" }, [
+    _c("div", { staticClass: "row mb-5" }, [
+      _vm.form.verified
+        ? _c("div", { staticClass: "col-lg-5" }, [
+            _c("span", { staticClass: "text-success" }, [
+              _vm._v("Cont Verificat")
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.form.suspended
+        ? _c("div", { staticClass: "col-lg-5" }, [
+            _c("span", { staticClass: "text-danger" }, [
+              _vm._v("Cont Suspendat")
+            ]),
+            _vm._v("\n            ("),
+            _c("span", {
+              staticClass: "text-dark",
+              domProps: { textContent: _vm._s(_vm.form.suspended_reason) }
+            }),
+            _vm._v(")\n        ")
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
     _vm.form.errors
       ? _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-lg-7" }, [
@@ -22717,215 +22751,211 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "col-lg-12" }, [
-      _c(
-        "form",
-        {
-          on: {
-            submit: function($event) {
-              $event.preventDefault()
-              return _vm.newProducts($event)
-            }
+  return _c("div", { staticClass: "col-lg-12" }, [
+    _c(
+      "form",
+      {
+        on: {
+          submit: function($event) {
+            $event.preventDefault()
+            return _vm.newProducts($event)
           }
-        },
-        [
-          _vm._l(_vm.categories, function(category) {
-            return _c("div", { key: category.id, staticClass: "row" }, [
-              _c("div", { staticClass: "col-lg-12" }, [
-                _c("div", { staticClass: "col-lg-12 pb-3" }, [
-                  _c("h2", [_vm._v(_vm._s(category.nume))])
-                ]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "form-group row" },
-                  _vm._l(category.subcategorii, function(product) {
-                    return _c(
-                      "div",
-                      { key: product.id, staticClass: "col-lg-4 px-4" },
-                      [
-                        _c("div", { staticClass: "field" }, [
-                          _c(
-                            "div",
-                            {
-                              class: {
-                                selectedBox: _vm.selectedProducts.includes(
-                                  product.id
-                                )
-                              }
-                            },
-                            [
-                              _c("label", { staticClass: "form-label" }, [
-                                _c("input", {
-                                  directives: [
-                                    {
-                                      name: "model",
-                                      rawName: "v-model",
-                                      value: _vm.selectedProducts,
-                                      expression: "selectedProducts"
-                                    }
-                                  ],
-                                  attrs: { type: "checkbox", name: product.id },
-                                  domProps: {
-                                    value: product.id,
-                                    checked: _vm.selectedProducts.includes(
-                                      product.id
-                                    ),
-                                    checked: Array.isArray(_vm.selectedProducts)
-                                      ? _vm._i(
-                                          _vm.selectedProducts,
-                                          product.id
-                                        ) > -1
-                                      : _vm.selectedProducts
+        }
+      },
+      [
+        _vm._l(_vm.categories, function(category) {
+          return _c("div", { key: category.id, staticClass: "row" }, [
+            _c("div", { staticClass: "col-lg-12" }, [
+              _c("div", { staticClass: "col-lg-12 pb-3" }, [
+                _c("h2", [_vm._v(_vm._s(category.nume))])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group row" },
+                _vm._l(category.subcategorii, function(product) {
+                  return _c(
+                    "div",
+                    { key: product.id, staticClass: "col-lg-4 px-4" },
+                    [
+                      _c("div", { staticClass: "field" }, [
+                        _c(
+                          "div",
+                          {
+                            class: {
+                              selectedBox: _vm.selectedProducts.includes(
+                                product.id
+                              )
+                            }
+                          },
+                          [
+                            _c("label", { staticClass: "form-label" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.selectedProducts,
+                                    expression: "selectedProducts"
+                                  }
+                                ],
+                                attrs: { type: "checkbox", name: product.id },
+                                domProps: {
+                                  value: product.id,
+                                  checked: _vm.selectedProducts.includes(
+                                    product.id
+                                  ),
+                                  checked: Array.isArray(_vm.selectedProducts)
+                                    ? _vm._i(_vm.selectedProducts, product.id) >
+                                      -1
+                                    : _vm.selectedProducts
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.check($event)
                                   },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.check($event)
-                                    },
-                                    change: function($event) {
-                                      var $$a = _vm.selectedProducts,
-                                        $$el = $event.target,
-                                        $$c = $$el.checked ? true : false
-                                      if (Array.isArray($$a)) {
-                                        var $$v = product.id,
-                                          $$i = _vm._i($$a, $$v)
-                                        if ($$el.checked) {
-                                          $$i < 0 &&
-                                            (_vm.selectedProducts = $$a.concat([
-                                              $$v
-                                            ]))
-                                        } else {
-                                          $$i > -1 &&
-                                            (_vm.selectedProducts = $$a
-                                              .slice(0, $$i)
-                                              .concat($$a.slice($$i + 1)))
-                                        }
+                                  change: function($event) {
+                                    var $$a = _vm.selectedProducts,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = product.id,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          (_vm.selectedProducts = $$a.concat([
+                                            $$v
+                                          ]))
                                       } else {
-                                        _vm.selectedProducts = $$c
+                                        $$i > -1 &&
+                                          (_vm.selectedProducts = $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1)))
                                       }
+                                    } else {
+                                      _vm.selectedProducts = $$c
                                     }
                                   }
-                                }),
-                                _vm._v(
-                                  "\n                                      " +
-                                    _vm._s(product.nume) +
-                                    "\n                                  "
-                                )
-                              ])
-                            ]
-                          )
-                        ])
-                      ]
-                    )
-                  }),
-                  0
-                ),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row" }, [
-                  _c("div", { staticClass: "col-lg-6 mb-3" }, [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.newProduct[category.id],
-                          expression: "newProduct[category.id]"
+                                }
+                              }),
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(product.nume) +
+                                  "\n                                "
+                              )
+                            ])
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group row" }, [
+                _c("div", { staticClass: "col-lg-6 mb-3" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.newProduct[category.id],
+                        expression: "newProduct[category.id]"
+                      }
+                    ],
+                    key: category.id,
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: category.id,
+                      placeholder: "Adauga produs nou"
+                    },
+                    domProps: { value: _vm.newProduct[category.id] },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
                         }
-                      ],
-                      key: category.id,
-                      staticClass: "form-control",
+                        _vm.$set(
+                          _vm.newProduct,
+                          category.id,
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-lg-6" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-warning btn-block",
                       attrs: {
-                        type: "text",
-                        name: category.id,
-                        placeholder: "Adauga produs nou"
+                        type: "button",
+                        disabled: !_vm.newProduct[category.id]
                       },
-                      domProps: { value: _vm.newProduct[category.id] },
                       on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.newProduct,
-                            category.id,
-                            $event.target.value
-                          )
+                        click: function($event) {
+                          return _vm.addProduct(category.id)
                         }
                       }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-lg-6" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-warning btn-block",
-                        attrs: {
-                          type: "button",
-                          disabled: !_vm.newProduct[category.id]
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.addProduct(category.id)
-                          }
-                        }
-                      },
-                      [_vm._v("Adauga produs in " + _vm._s(category.nume))]
-                    )
-                  ])
+                    },
+                    [_vm._v("Adauga produs in " + _vm._s(category.nume))]
+                  )
                 ])
               ])
             ])
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-12 mb-3" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.newCategory,
-                    expression: "newCategory"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "new_category",
-                  placeholder: "Adauga Categorie noua"
-                },
-                domProps: { value: _vm.newCategory },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.newCategory = $event.target.value
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-lg-12" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-info btn-block",
-                  attrs: { type: "button", disabled: !_vm.newCategory },
-                  on: { click: _vm.addCategory }
-                },
-                [_vm._v("Adauga Categorie")]
-              )
-            ])
           ])
-        ],
-        2
-      )
-    ])
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.newCategory,
+                  expression: "newCategory"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "new_category",
+                placeholder: "Adauga Categorie noua"
+              },
+              domProps: { value: _vm.newCategory },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.newCategory = $event.target.value
+                }
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-6" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-info btn-block",
+                attrs: { type: "button", disabled: !_vm.newCategory },
+                on: { click: _vm.addCategory }
+              },
+              [_vm._v("Adauga Categorie")]
+            )
+          ])
+        ])
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = [

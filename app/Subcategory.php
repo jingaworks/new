@@ -23,4 +23,6 @@ class Subcategory extends Model
     {
         return $this->belongsToMany(Producator::class);
     }
+
+    
 }

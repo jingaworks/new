@@ -1,6 +1,15 @@
 <template>
     <div class="col-lg-12 col-md-12 col-sm-12 mb-5">
 
+        <div class="row mb-5">
+            <div class="col-lg-5" v-if="form.verified">
+                <span class="text-success">Cont Verificat</span>
+            </div>
+            <div class="col-lg-5" v-if="form.suspended">
+                <span class="text-danger">Cont Suspendat</span>
+                (<span class="text-dark" v-text="form.suspended_reason"></span>)
+            </div>
+        </div>
         <div class="row" v-if="form.errors">
             <div class="col-lg-7">
                 <form @submit.prevent="formSubmit" @keydown="form.errors.clear($event.target.name)">
@@ -124,6 +133,8 @@
                     viza: '',
                     phone: '',
                     verified: '',
+                    suspended: '',
+                    suspended_reason: '',
                 },
                 imageLink: '',
                 showModal: false,

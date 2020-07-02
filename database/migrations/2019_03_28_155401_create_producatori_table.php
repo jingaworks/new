@@ -22,8 +22,15 @@ class CreateProducatoriTable extends Migration
             $table->string('place', 100);
             $table->year('viza');
             $table->string('phone', 10);
-            $table->boolean('verified')->default(false);
+            $table->text('descriere')->nullable();
             $table->unsignedBigInteger('user_id');
+            
+            $table->boolean('verified')->default(false);
+            $table->unsignedBigInteger('verified_by')->nullable();
+            $table->boolean('suspended')->default(false);
+            $table->text('suspended_reason')->nullable();
+            $table->unsignedBigInteger('suspended_by')->nullable();
+            
             $table->timestamps();
 
             $table->unique(['phone']);

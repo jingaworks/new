@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\PaginaProdus;
 use App\Category;
 use App\Subcategory;
 use App\Http\Requests\NewCategoryRequest;
@@ -94,6 +95,56 @@ class ProduseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function updatePage($slug)
+    {
+        $produs = Subcategory::where('slug', $slug)->firstOrfail();
+        $data = PaginaProdus::where(['user_id' => auth()->user()->id, 'subcategory_id' => $produs->id])->first();
+
+        if($data) {
+            return view('cont.produse.pagina.edit', compact(['data', 'produs']));
+        }
+        return view('cont.produse.pagina.create', compact(['produs']));
+    } 
+    
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function storePage(Request $request)
+    {
+
+        dd($request->all());
+
+        // $produs = Subcategory::where('slug', $slug)->firstOrfail();
+        // $pagina = PaginaProdus::where(['user_id' => auth()->user()->id, 'subcategory_id' => $produs->id])->first();
+
+        // if(!$pagina) {
+            
+        //     $paginaNoua = PaginaProdus::create([
+        //         'category_id' => $produs->category_id,
+        //         'subcategory_id' => $produs->id,
+        //         'user_id' => auth()->user()->id,
+        //         'nume' => "Numele paginii",
+        //         'slug' => "numele-paginii",
+        //         'descriere' => "lore ipsum descriere produs...",
+        //         ]);
+                
+                
+        //         return view('cont.produse.create', compact(['data']));
+        //         return $paginaNoua;
+        // }
+        // return $pagina;
+    } 
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function showOwn()
     {
         $all = auth()->user()->producator->subcategorii;
@@ -112,7 +163,9 @@ class ProduseController extends Controller
     {
         $current = auth()->user()->producator->produse;
         $categories = Category::with('subcategorii')->get();
-        return ['categories' => $categories, 'current' => $current];
+        
+
+        return ['user_id' => auth()->user()->id, 'categories' => $categories, 'current' => $current];
     }
 
     /**
@@ -123,8 +176,14 @@ class ProduseController extends Controller
      */
     public function syncProducts(SyncSubcategoryRequest $request)
     {
+        //dd($request->products);
         $user = auth()->user();
         $user->producator->produse()->sync($request->products);
+
+        $inactivatePagesId = PaginaProdus::whereNotIn('subcategory_id', $request->products)->pluck('id');
+        PaginaProdus::whereIn('subcategory_id', $request->products)->update(['active' => 1]);
+        PaginaProdus::whereIn('id', $inactivatePagesId)->update(['active' => 0]);
+
         $current = null;
         if ($request->current) {
             $current = Subcategory::find($request->current)->first();
