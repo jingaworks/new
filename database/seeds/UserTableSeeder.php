@@ -27,9 +27,10 @@ class UserTableSeeder extends Seeder
             'numar' => '1000000',
             'region' => 'Constanta',
             'place' => 'Constanta',
-            'viza' => '2019',
+            'viza' => '2020',
             'phone' => '0735123456',
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'descriere' => " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus auctor venenatis mauris sit amet finibus. Curabitur pretium porttitor nulla, ac sollicitudin arcu tincidunt a. Aliquam id ligula nec sem pharetra lacinia id quis diam. Cras et congue leo, ac congue risus. Suspendisse vel enim sit amet sapien suscipit dignissim in at augue. Maecenas vel urna facilisis arcu ornare commodo at sed ligula. Nulla ut ante nec urna posuere sagittis eu ac eros."
         ]);
         
         Companie::create([

@@ -120,6 +120,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/adauga-produs', 'ProduseController@newSubcategory');
             Route::get('/editeaza-produse', 'ProduseController@edit')->name('cont.editeaza.produse');
             
+            Route::get('/produse/editeaza-pagina/{slug}', 'ProduseController@updatePage')->name('cont.editeaza.pagina');
+            Route::post('/produse/editeaza-pagina', 'ProduseController@storePage')->name('cont.editeaza.salveaza.pagina');
+            
             Route::get('/json-producator', 'ProducatorController@getDataForm');
             Route::get('/date-producator', 'ProducatorController@show')->name('cont.arata.producator');
             Route::get('/editeaza-producator', 'ProducatorController@edit')->name('cont.editeaza.producator');

@@ -1,7 +1,4 @@
 <template>
-  <div>
-
-
     <div class="col-lg-12">
 
         <form @submit.prevent="newProducts">
@@ -10,9 +7,10 @@
 
                 <div class="col-lg-12 pb-3"><h2>{{ category.nume }}</h2></div>
 
-                <div class="form-group row">
+                <div class="form-group row" >
                     <!-- <div class="col-lg-12"> -->
                         <div v-for="product in category.subcategorii" :key="product.id" class="col-lg-4 px-4">
+                            <!-- <div class="field" v-if="product.active == 1 || product.user_id == owner_id"> -->
                             <div class="field">
                                 <div class="" :class="{ selectedBox: selectedProducts.includes(product.id) }">
                                     <label class="form-label">
@@ -41,17 +39,16 @@
               <div class="col-lg-12 pb-3">
                 <hr>
               </div>
-                <div class="col-lg-12 mb-3">
+                <div class="col-lg-6">
                     <input class="form-control" type="text" name="new_category" v-model="newCategory" placeholder="Adauga Categorie noua">
                 </div>
-                <div class="col-lg-12">
+                <div class="col-lg-6">
                     <button type="button" :disabled="!newCategory" class="btn btn-info btn-block" @click="addCategory">Adauga Categorie</button>
                 </div>
             </div>
 
         </form>
     </div>
-  </div>
 </template>
 
 <script>
@@ -62,7 +59,8 @@ export default {
       newCategory: null,
       selectedProducts: [],
       newProduct: [],
-      currentProduct: null
+      currentProduct: null,
+      owner_id: null
     };
   },
 
@@ -144,6 +142,7 @@ export default {
         .then((response) => {
           this.categories = response.data.categories
           this.selectedProducts = response.data.current.map(obj => obj.id)
+          this.owner_id = response.data.user_id
         })
         .catch(error => {
           console.log(error);

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-lg-12">
+        <div class="col-lg-10">
             <div class="row py-3">
                 <div class="col-lg-12">
                     <a class="btn btn-info btn-block" href="{{ route('cont.arata.produse') }}">Modifica Produse</a>

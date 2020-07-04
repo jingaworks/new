@@ -55,7 +55,7 @@ class ProducatorController extends Controller
      */
     public function getDataForm()
     {
-        $data = auth()->user()->producator->only(['titular', 'serie', 'numar', 'region', 'place', 'viza', 'phone', 'verified']);
+        $data = auth()->user()->producator->only(['titular', 'serie', 'numar', 'region', 'place', 'viza', 'phone', 'verified', 'suspended', 'suspended_reason']);
 
         return ['producator' => $data];
     }
@@ -69,11 +69,9 @@ class ProducatorController extends Controller
      */
     public function update(UpdateProducatorRequest $request)
     {
-        $producator = auth()->user()->producator;
+        $producator = auth()->user()->producator->update($request->all());
 
-        $producator->update($request->all());
-
-        return ['message' => 'Atestat Producator editat cu succes'];
+        return ['status' => 'Atestat Producator editat cu succes'];
     }
 
     /**

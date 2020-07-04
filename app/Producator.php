@@ -14,7 +14,7 @@ class Producator extends Model
      * @var array
      */
     protected $fillable = [
-        'titular', 'serie', 'numar', 'place', 'region', 'viza', "phone",
+        'titular', 'serie', 'numar', 'place', 'region', 'viza', "phone", "descriere",
     ];
 
     public function user() {

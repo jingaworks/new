@@ -24,7 +24,7 @@ class SyncSubcategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'products' => 'required|array',
+            'products' => 'array',
             'products.*' => 'exists:subcategories,id', // check each item in the array
         ];
     }
